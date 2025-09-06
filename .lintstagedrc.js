@@ -1,12 +1,13 @@
-const path = require('path');
+import path from 'path';
 
 const buildEslintCommand = (filenames) =>
-  `next lint --fix --file ${filenames
+  `eslint --fix ${filenames
     .map((f) => path.relative(process.cwd(), f))
-    .join(' --file ')}`;
+    .join(' ')}`;
 
 const formatCommand = 'prettier --write';
 
-module.exports = {
+export default {
   '*.{js,jsx,ts,tsx}': [formatCommand, buildEslintCommand],
+  '*.{json,css,md}': [formatCommand],
 };
